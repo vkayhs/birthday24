@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday 2024</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #121212;
+        color: #ffffff;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        background: #1e1e1e;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+      .question {
+        margin-bottom: 20px;
+      }
+      .option {
+        display: block;
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #333;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.2s, background-color 0.2s;
+      }
+      .option:hover {
+        background-color: #555;
+      }
+      .option:active {
+        transform: scale(0.98);
+      }
+      .final-message {
+        font-weight: bold;
+        color: #c3c3c3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="quiz-game">
+        <img src="Babe.JPG" alt="" height="150px" />
+        <p>
+          A very Happy Birthday to you my love! You are turning 26!! That's an
+          amazing milestone ❤️ It's been an honor to be with you through the
+          last few years and it's been a privilege to watch you grow. But, it's
+          also time to test your memory! 😂 And so I have prepared a quiz to see
+          how much you remember. All the best!
+        </p>
+        <button class="option" onclick="startQuiz()">Start</button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          question: "What was the first English movie we watched together?",
+          options: [
+            { answer: "Nimona", correct: false },
+            { answer: "Miraculous Lady Bug", correct: true },
+            { answer: "Dora and the Lost City of Gold", correct: false },
+            { answer: "50 Shades of Grey", correct: false },
+          ],
+        },
+        {
+          question:
+            "What was the name of the dish I didn't get on time when we first met?",
+          options: [
+            { answer: "Linguini", correct: false },
+            { answer: "Lampoti", correct: false },
+            { answer: "Lasagne", correct: true },
+            { answer: "Lampreda", correct: false },
+          ],
+        },
+        {
+          question: "On what date did we first say I love you?",
+          options: [
+            { answer: "14 November 2021", correct: true },
+            { answer: "15 November 2021", correct: false },
+            { answer: "12 November 2021", correct: false },
+            { answer: "13 November 2021", correct: false },
+          ],
+        },
+        {
+          question: "What is our favorite shared hobby?",
+          options: [
+            { answer: "Playing UNO", correct: false },
+            { answer: "Watching shows", correct: false },
+            { answer: "Doing everything together", correct: false },
+            { answer: "All of the above", correct: true },
+          ],
+        },
+        {
+          question: "What is my favorite video game?",
+          options: [
+            { answer: "Grand Theft Auto", correct: true },
+            { answer: "League of Legends", correct: false },
+            { answer: "Hearthstone", correct: false },
+            { answer: "Slay the Spire", correct: false },
+          ],
+        },
+        {
+          question: "What was one of my favorite moments of the year with you?",
+          options: [
+            { answer: "Going to the dinosaur park", correct: true },
+            { answer: "Going to Lajpat", correct: false },
+            { answer: "Riding the metro", correct: false },
+            {
+              answer: "Discovering that Big Bowl has Manchurian",
+              correct: false,
+            },
+          ],
+        },
+        {
+          question: "What was my high score in Block Blast??",
+          options: [
+            { answer: "5168", correct: true },
+            { answer: "5681", correct: false },
+            { answer: "5571", correct: false },
+            { answer: "5321", correct: false },
+          ],
+        },
+        {
+          question:
+            "Out of everything that brought me joy, What brought me the most joy this year?",
+          options: [
+            { answer: "You getting a raise", correct: true },
+            { answer: "You starting to learn photography", correct: true },
+            { answer: "Your working on Ankita Designz", correct: true },
+            { answer: "Everything got well at home with you", correct: true },
+          ],
+        },
+        {
+          question:
+            "What is my most hated train number in the Indian Railways?",
+          options: [
+            { answer: "12581", correct: true },
+            { answer: "12582", correct: true },
+            { answer: "15283", correct: false },
+            { answer: "15281", correct: false },
+          ],
+        },
+        {
+          question: "Do you know how much I love you?",
+          options: [
+            { answer: "Yes", correct: true },
+            { answer: "Yes, but a lot more with another yes", correct: true },
+            { answer: "Hell yes", correct: true },
+            { answer: "Beyond yes", correct: true },
+          ],
+        },
+      ];
+
+      let currentQuestionIndex = 0;
+      let score = 0;
+
+      function startQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        showQuestion();
+      }
+
+      function showQuestion() {
+        const quizGameDiv = document.getElementById("quiz-game");
+        const questionObj = questions[currentQuestionIndex];
+        let html = `<div class="question"><p>${questionObj.question}</p>`;
+        questionObj.options.forEach((option, i) => {
+          html += `<button class="option" onclick="nextQuestion(${i})">${option.answer}</button>`;
+        });
+        html += `</div>`;
+        quizGameDiv.innerHTML = html;
+      }
+
+      function nextQuestion(optionIndex) {
+        const questionObj = questions[currentQuestionIndex];
+        if (questionObj.options[optionIndex].correct) {
+          score++;
+        }
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          showFinalMessage();
+        }
+      }
+
+      function showFinalMessage() {
+        const quizGameDiv = document.getElementById("quiz-game");
+        quizGameDiv.innerHTML = `<p class="final-message">You scored ${score} out of ${questions.length}! No matter the score, every moment with you has been amazing. Here’s to many more adventures and memories! ❤️ Please read the letter for further instructions.</p>`;
+      }
+    </script>
+  </body>
+</html>
